@@ -1,0 +1,84 @@
+﻿@page "/UpdateEmployee/{id}"
+@inject BlazoreApp.Data.EmployeeService EmplyeeResult
+@inject NavigationManager Navigation
+<h3>UpdateEmployee</h3>
+
+<EditForm Model="employee" OnSubmit="@SubmmiteEmployeeData">
+	<div class="container justify-content-center">
+		<div class=" row">
+			<div class="col-md-5">
+				<div class="form-group">
+					<label>First Name </label>
+					<input id="txtFname" name="FirstName" class="form-control" @bind-value="@employee.EmployeeFName" />
+				</div>
+			</div>
+		</div>
+		<div class=" row">
+			<div class="col-md-5">
+				<div class="form-group">
+					<label>Last Name </label>
+					<input id="txtLname" name="LastName" class="form-control" @bind-value="@employee.EmployeeLName" />
+				</div>
+			</div>
+		</div>
+		<div class=" row">
+			<div class="col-md-5">
+				<div class="form-group">
+					<label>Employee Department</label>
+					<input id="txtEmployeeDepartment" name="EmployeeDepartment" class="form-control" @bind-value="@employee.EmployeeDepartment" />
+				</div>
+			</div>
+		</div>
+		<div class=" row">
+			<div class="col-md-5">
+				<div class="form-group">
+					<label>Salary</label>
+					<input id="txtSalary" name="Salary" class="form-control" @bind-value="@employee.Salary" />
+				</div>
+			</div>
+		</div>
+		<div class=" row">
+			<div class="col-md-5">
+				<div class="form-group">
+					<label>BirhtDate</label>
+
+					<div class="input-group input-append date" id="datePicker" data-provide="datepicker">
+							<input id="txtDate" name="BirthDate" class="form-control" @bind-value="@employee.BirthDate" />
+						<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+					</div>
+
+					
+				</div>
+			</div>
+		</div>
+		<button type="submit" class="btn btn-primary mt-2 text-center">Update</button>
+	</div>
+
+
+</EditForm>
+
+
+@code {
+	[Parameter]
+	public string id { get; set; }
+	private BlazoreApp.Model.Employee employee { get; set; }
+	protected override void OnInitialized()
+	{
+		if (!string.IsNullOrEmpty(id) && id == "0")
+		{
+			BlazoreApp.Model.Employee employee1 = new BlazoreApp.Model.Employee();
+			employee = employee1;
+
+
+		}
+		else
+		{
+		employee = EmplyeeResult.GetEmployee(Convert.ToInt16(id));
+		}
+	}
+	private void SubmmiteEmployeeData()
+	{
+		EmplyeeResult.AddOrUpdateEmployee(employee);
+		Navigation.NavigateTo("employee");
+	}
+}

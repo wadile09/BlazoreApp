@@ -1,0 +1,50 @@
+﻿@page "/employee"
+
+<h3>Employee</h3>
+@inject BlazoreApp.Data.EmployeeService EmplyeeResult
+<a href="UpdateEmployee/0">Add New</a>
+<table class="table table-bordered">
+	<thead>
+		<tr>
+			<td>ID</td>
+			<td>Employee Name</td>
+			<td>Department</td>
+			<td>Salary</td>
+			<td>Edit</td>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach(var employee in employeesList)
+		{
+			<tr>
+				<td>@employee.Id</td>
+				<td>@employee.EmployeeFName @employee.EmployeeLName</td>
+				<td>@employee.EmployeeDepartment</td>
+				<td>@employee.Salary</td>
+				<td>
+					<a href="UpdateEmployee/@employee.Id">Edit</a>
+
+				</td>
+			</tr>
+		<input type="hidden" @bind-value="@employee.DepartmentId" />			
+		}
+	</tbody>
+	
+</table>
+
+
+
+@code {
+
+	private List<BlazoreApp.Model.Employee> employeesList = new List<BlazoreApp.Model.Employee>();
+	protected override void OnInitialized()
+	{
+		employeesList = EmplyeeResult.GetData();
+	}
+	
+
+
+
+
+
+}

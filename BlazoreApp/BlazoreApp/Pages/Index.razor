@@ -1,0 +1,33 @@
+﻿@page "/"
+@using BlazoreApp.Data;
+@inject BlazoreApp.Data.EmployeeService EmplyeeResult
+<PageTitle>Index</PageTitle>
+
+<h1>Hello, world!</h1>
+
+@*<div class="container">
+
+	<input type="text" class="form-control" id="name" @bind="@CurrentValue" />
+	<button type="submit" class="btn btn-primary mt-5 justify-content-center" onclick="@click">Save</button>
+</div>*@
+
+Welcome to your new app.
+
+
+@*<SurveyPrompt Title="How is Blazor working for you?" />*@
+@code {
+
+	private string CurrentValue { get; set; } = "blazor";
+}
+@code{
+
+	protected override void OnInitialized()
+	{
+
+
+	}
+
+
+
+
+}
